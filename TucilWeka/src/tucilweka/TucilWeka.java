@@ -14,9 +14,15 @@ import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.NumericToNominal;
 //import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Random;
+import java.util.Scanner;
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
 
 /**
  *
@@ -65,6 +71,40 @@ public class TucilWeka {
         DataSink.write("model.arff", I);
     }
     
+    public void readNewInstance()
+    {
+        /*
+        @ATTRIBUTE sepallength	REAL
+        @ATTRIBUTE sepalwidth 	REAL
+        @ATTRIBUTE petallength 	REAL
+        @ATTRIBUTE petalwidth	REAL
+        @ATTRIBUTE class 	{Iris-setosa,Iris-versicolor,Iris-virginica}
+        5.5,2.4,3.7,1.0,Iris-versicolor
+        */
+        Instance inst = new DenseInstance(I.firstInstance());
+        // Set instance's values for the attributes "length", "weight", and "position"
+        System.out.println(inst.numAttributes());
+        inst.setDataset(I);
+        
+	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
+	System.out.println(s.nextFloat());
+        System.out.println(s.nextFloat());
+	System.out.println(s.nextFloat());
+	System.out.println(s.nextFloat());
+        System.out.println(s.nextLine());
+	s.close();
+        inst.setValue(0, 6.0);
+        inst.setValue(1, 3.0 );
+        inst.setValue(2, 3.2);
+        inst.setValue(3, 1.5 );
+        inst.setValue(4, "Iris-versicolor");
+        
+        // Set instance's dataset to be the dataset "race"
+        I.add(inst);
+        // Print the instance
+        System.out.println("The instance: " + inst);
+    }
+    
     public static void main(String[] args) throws Exception {
         TucilWeka W = new TucilWeka();
         try {
@@ -72,13 +112,18 @@ public class TucilWeka {
         } catch (IOException ex) {
             Logger.getLogger(TucilWeka.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(W.I.toSummaryString());
+        System.out.println("\nDataset:\n");
+        System.out.println(W.I); 
+        W.readNewInstance();
+        System.out.println("\nDataset:\n");
+        System.out.println(W.I);
+        /*System.out.println(W.I.toSummaryString());
         W.filter();
         System.out.println(W.I2.toSummaryString());
         W.evaluate();
         System.out.println(W.E.toSummaryString());
         W.buildClassifier();
-        W.saveModel();
+        W.saveModel();*/
     }
     
 }
