@@ -85,20 +85,20 @@ public class TucilWeka {
         // Set instance's values for the attributes "length", "weight", and "position"
         System.out.println(inst.numAttributes());
         inst.setDataset(I);
-        
-	Scanner s = new Scanner(System.in).useDelimiter("\\s*,\\s*");
-	System.out.println(s.nextFloat());
-        System.out.println(s.nextFloat());
-	System.out.println(s.nextFloat());
-	System.out.println(s.nextFloat());
-        System.out.println(s.nextLine());
-	s.close();
-        inst.setValue(0, 6.0);
-        inst.setValue(1, 3.0 );
-        inst.setValue(2, 3.2);
-        inst.setValue(3, 1.5 );
-        inst.setValue(4, "Iris-versicolor");
-        
+        Scanner s1 = new Scanner(System.in);
+        String Input;
+        Input = s1.nextLine();
+        s1.close();
+	System.out.println("Anjing");
+        Scanner s = new Scanner(Input).useDelimiter(",");
+        while(s.hasNext()){
+            inst.setValue(0, s.nextFloat());
+            inst.setValue(1, s.nextFloat());
+            inst.setValue(2, s.nextFloat());
+            inst.setValue(3, s.nextFloat());
+            inst.setValue(4, s.next());
+        }
+        s.close();
         // Set instance's dataset to be the dataset "race"
         I.add(inst);
         // Print the instance
@@ -113,8 +113,10 @@ public class TucilWeka {
             Logger.getLogger(TucilWeka.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("\nDataset:\n");
-        System.out.println(W.I); 
+        System.out.println(W.I);
+        System.out.println("Sebelum");
         W.readNewInstance();
+        System.out.println("Sesudah");
         System.out.println("\nDataset:\n");
         System.out.println(W.I);
         /*System.out.println(W.I.toSummaryString());
