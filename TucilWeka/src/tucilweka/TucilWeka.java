@@ -89,13 +89,12 @@ public class TucilWeka {
         */
         Instance inst = new DenseInstance(I.firstInstance());
         // Set instance's values for the attributes "length", "weight", and "position"
-        System.out.println(inst.numAttributes());
         inst.setDataset(I);
         Scanner s1 = new Scanner(System.in);
         String Input;
-        Input = s1.nextLine();
+        Input = s1.next();
+        System.out.println(Input);
         s1.close();
-	System.out.println("Anjing");
         Scanner s = new Scanner(Input).useDelimiter(",");
         while(s.hasNext()){
             inst.setValue(0, s.nextFloat());
@@ -118,6 +117,13 @@ public class TucilWeka {
         } catch (IOException ex) {
             Logger.getLogger(TucilWeka.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(W.I.toSummaryString());
+        W.filter();
+        System.out.println(W.I2.toSummaryString());
+        W.evaluate();
+        System.out.println(W.E.toSummaryString());
+        W.buildClassifier();
+        W.saveModel();
         System.out.println("\nDataset:\n");
         System.out.println(W.I);
         System.out.println("\nSebelum\n");
@@ -125,13 +131,6 @@ public class TucilWeka {
         System.out.println("\nSesudah\n");
         System.out.println("\nDataset:\n");
         System.out.println(W.I);
-        /*System.out.println(W.I.toSummaryString());
-        W.filter();
-        System.out.println(W.I2.toSummaryString());
-        W.evaluate();
-        System.out.println(W.E.toSummaryString());
-        W.buildClassifier();
-        W.saveModel();*/
     }
     
 }
