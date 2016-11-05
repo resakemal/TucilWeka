@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Random;
 import java.util.Scanner;
+import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
@@ -68,7 +69,12 @@ public class TucilWeka {
     
     public void saveModel() throws Exception
     {
-        DataSink.write("model.arff", I);
+        weka.core.SerializationHelper.write("tucil.model", C);
+    }
+    
+    public void openModel() throws Exception
+    {
+         C = (J48) (Classifier) weka.core.SerializationHelper.read("tucil.model");
     }
     
     public void readNewInstance()
@@ -114,9 +120,9 @@ public class TucilWeka {
         }
         System.out.println("\nDataset:\n");
         System.out.println(W.I);
-        System.out.println("Sebelum");
+        System.out.println("\nSebelum\n");
         W.readNewInstance();
-        System.out.println("Sesudah");
+        System.out.println("\nSesudah\n");
         System.out.println("\nDataset:\n");
         System.out.println(W.I);
         /*System.out.println(W.I.toSummaryString());
